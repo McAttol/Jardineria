@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-function TasckList() {
+function TasckListByDate() {
 
     const [tasks, setTask] = useState([]);
+    const [onDate, setOnDate] = useState('');
 
-    const fetchTasksData = (date) => {
-        axios.get(`http://localhost:8000/tasks`)
+    const { date } = useParams();
+
+    const fetchTasksDataByDate = (date) => {
+        axios.get(`http://localhost:8000/tasks/date/${date}`)
         .then(response => {
             setTask(response.data)
         }, error => {console.log(error)})
     }
     
     useEffect(()=>{
-        fetchTasksData()
-    })
+        setOnDate(date)
+        fetchTasksDataByDate(date)
+    },[date])
 
     const taskList = () =>{
         return(
@@ -27,10 +31,10 @@ function TasckList() {
     
     return(
         <>
-            <h2>Tasks List</h2>
+            <h2>{onDate}</h2>
             {tasks !== 'Not result' ? taskList() : <p>{'No tasks today'}</p>}
         </>
     )
 }
 
-export default TasckList;
+export default TasckListByDate;

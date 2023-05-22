@@ -3,8 +3,9 @@ import Header from '../components/Header';
 import Login from '../components/Login';
 import Footer from '../components/Footer';
 import Calendar from '../components/Calendar';
-import TaskList from '../components/TaskList';
+import TaskListByDate from '../components/TaskListByDate';
 import TaskDetail from '../components/TaskDetail';
+import TasckList from '../components/TaskList';
 
 function Router() {
     return(
@@ -13,7 +14,8 @@ function Router() {
             <Routes>
                 <Route path='/' element={<Login/>}></Route>
                 <Route path='/home' element={<Calendar/>}></Route>
-                <Route path='/tasks/date/:date' element={<TaskList/>}></Route>
+                <Route path='/tasks' element={<TasckList/>}></Route>
+                <Route path='/tasks/date/:date' element={<TaskListByDate/>}></Route>
                 <Route path='/tasks/:id' element={<TaskDetail/>}></Route>
             </Routes>
             <Footer/>
